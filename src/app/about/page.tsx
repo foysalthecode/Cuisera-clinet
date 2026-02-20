@@ -1,4 +1,6 @@
-export default function AboutPage() {
+export default async function AboutPage() {
+  await new Promise((resolve) => setTimeout(resolve, 4000));
+
   return (
     <div>
       <h1>this is about page</h1>
