@@ -19,7 +19,6 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { authClient } from "@/src/lib/auth-client";
 
-const APP_URL = process.env.APP_URL;
 
 export function LoginForm({
   className,
