@@ -3,6 +3,7 @@ export interface Meals {
   title: string;
   description: string;
   thumbnail: string | null;
+  isFeatured: boolean;
   isPublished: boolean;
   status: string;
   review: string | null;

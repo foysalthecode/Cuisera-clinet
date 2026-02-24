@@ -1,6 +1,8 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
+  CardAction,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -20,9 +22,12 @@ export function MealCard({ meal }: { meal: Meals }) {
           width={100}
           src={meal.thumbnail ?? "/placeholder.png"}
           alt="Meal Picture"
-          className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+          className="relative z-20 aspect-video w-full rounded-lg object-cover brightness-60 grayscale dark:brightness-40"
         />
         <CardHeader>
+          <CardAction>
+            {meal.isFeatured && <Badge variant="secondary">Featured</Badge>}
+          </CardAction>
           <CardTitle className="text-2xl">{meal.title}</CardTitle>
           <p>${meal.price}</p>
           <p className="flex items-center gap-2 text-gray-500">
