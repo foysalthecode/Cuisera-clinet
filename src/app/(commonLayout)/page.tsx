@@ -16,8 +16,8 @@ export default async function Home() {
         <h1 className="text-5xl font-bold">Cuisines</h1>
         <CategoryCarousel categories={categories}></CategoryCarousel>
       </div>
-      <div className="text-center">
-        <h1 className="text-5xl font-bold py-5">Featured</h1>
+      <div>
+        <h1 className="text-5xl text-center font-bold py-5">Featured</h1>
         <div className="grid md:grid-cols-4 gap-4 p-2 mx-auto">
           {data?.data?.data?.map(
             (meal: Meals) =>

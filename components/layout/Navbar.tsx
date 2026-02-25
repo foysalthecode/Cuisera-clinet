@@ -61,8 +61,8 @@ const Navbar = ({
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "About",
-      url: "/about",
+      title: "Meal",
+      url: "/meals",
     },
     {
       title: "Contact",
@@ -101,7 +101,7 @@ const Navbar = ({
           </div>
           <div className="flex gap-2">
             <ModeToggle></ModeToggle>
-            <Link href={"/"} className="border p-2.5 rounded-lg hover:bg-gray-200">
+            <Link href={"/cart"} className="border p-2.5 rounded-lg hover:bg-gray-200">
               <CiShoppingCart />
             </Link>
             <Button asChild variant="outline" size="sm">
@@ -123,7 +123,7 @@ const Navbar = ({
 
             <div className="flex gap-1.5">
               <ModeToggle></ModeToggle>
-              <Link href={"/"} className="border p-2.5 rounded-lg">
+              <Link href={"/cart"} className="border p-2.5 rounded-lg">
                 <CiShoppingCart />
               </Link>
               <Sheet>
