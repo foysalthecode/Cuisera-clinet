@@ -14,8 +14,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { CiShoppingCart } from "react-icons/ci";
 import { MdDeliveryDining } from "react-icons/md";
+import Swal from "sweetalert2";
 
 export function MealCard({ meal }: { meal: Meals }) {
+  const handleAddToCart = async(id: string) => {
+    addToCart(id);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
@@ -43,8 +54,8 @@ export function MealCard({ meal }: { meal: Meals }) {
             <Button className="w-full">Checkout</Button>
           </Link>
           <Button
-            onClick={() => addToCart(meal.id)}
-            className="border rounded-lg p-2.5"
+            onClick={() => handleAddToCart(meal.id)}
+            className="border rounded-lg p-2.5 bg-white text-black hover:bg-gray-300"
           >
             <CiShoppingCart />
           </Button>
