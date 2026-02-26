@@ -7,7 +7,16 @@ import { mealService } from "@/src/services/meal.service";
 import { Meals } from "@/src/types";
 
 export default async function AllMeals() {
-  const { data } = await mealService.getAllMeals();
+  const searchData = ""
+  const { data } = await mealService.getAllMeals(
+    {
+      sort: "desc",
+      search: searchData,
+    },
+    {
+      revalidate: 10,
+    },
+  );
   return (
     <div>
       <div className="flex justify-between mx-2 gap-2">

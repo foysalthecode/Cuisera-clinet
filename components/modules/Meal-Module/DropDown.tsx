@@ -6,15 +6,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export function Dropdown() {
-  const [position, setPosition] = React.useState("bottom");
-  console.log("from meal drop down", position);
+  const [position, setPosition] = React.useState("asc");
+  console.log("from meal dropdown comp", position);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

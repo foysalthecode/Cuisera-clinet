@@ -13,3 +13,8 @@ export interface Meals {
   updatedAt: string;
   userId: string;
 }
+
+export interface MealResponse {
+  success: boolean;
+  data: Meals;
+}

@@ -101,7 +101,10 @@ const Navbar = ({
           </div>
           <div className="flex gap-2">
             <ModeToggle></ModeToggle>
-            <Link href={"/cart"} className="border p-2.5 rounded-lg hover:bg-gray-200">
+            <Link
+              href={"/cart"}
+              className="border p-2.5 rounded-lg hover:bg-gray-200"
+            >
               <CiShoppingCart />
             </Link>
             <Button asChild variant="outline" size="sm">
@@ -135,13 +138,10 @@ const Navbar = ({
                 <SheetContent className="overflow-y-auto">
                   <SheetHeader>
                     <SheetTitle>
-                      <a href={logo.url} className="flex items-center gap-2">
-                        <img
-                          src={logo.src}
-                          className="max-h-8 dark:invert"
-                          alt={logo.alt}
-                        />
-                      </a>
+                      <a
+                        href={logo.url}
+                        className="flex items-center gap-2"
+                      ></a>
                     </SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col gap-6 p-4">
