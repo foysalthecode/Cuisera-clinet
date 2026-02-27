@@ -16,7 +16,13 @@ import { CiShoppingCart } from "react-icons/ci";
 import { MdDeliveryDining } from "react-icons/md";
 import Swal from "sweetalert2";
 
-export function MealCard({ meal }: { meal: Meals }) {
+export function MealCard({
+  meal,
+  isAuthenticated,
+}: {
+  meal: Meals;
+  isAuthenticated?: boolean;
+}) {
   const handleAddToCart = async (id: string) => {
     addToCart(id);
     Swal.fire({
@@ -66,6 +72,7 @@ export function MealCard({ meal }: { meal: Meals }) {
           </Link>
           <Button
             onClick={() => handleAddToCart(meal.id)}
+            disabled={isAuthenticated}
             className="border rounded-lg p-2.5 bg-white text-black hover:bg-gray-300"
           >
             <CiShoppingCart />

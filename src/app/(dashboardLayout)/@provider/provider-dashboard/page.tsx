@@ -1,7 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function ProviderDashboard() {
-  return (
-    <div>
-      <h1>Provider dashboard</h1>
-    </div>
-  );
+  return redirect("/provider-dashboard/create-meal");
 }

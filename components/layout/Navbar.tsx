@@ -22,6 +22,8 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import { CiShoppingCart } from "react-icons/ci";
+import { authClient } from "@/lib/auth-client";
+import Logout from "../modules/authentication/logout";
 
 interface MenuItem {
   title: string;
@@ -50,6 +52,7 @@ interface Navbar1Props {
       url: string;
     };
   };
+  isLoggedIn: string | undefined;
 }
 
 const Navbar = ({
@@ -78,6 +81,7 @@ const Navbar = ({
     signup: { title: "Sign up", url: "/signup" },
   },
   className,
+  isLoggedIn,
 }: Navbar1Props) => {
   return (
     <section className={cn("py-4", className)}>
@@ -107,12 +111,18 @@ const Navbar = ({
             >
               <CiShoppingCart />
             </Link>
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+            {isLoggedIn ? (
+              <Logout></Logout>
+            ) : (
+              <div className="flex gap-2">
+                <Button asChild variant="outline" size="sm">
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
+                </Button>
+                <Button asChild size="sm">
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                </Button>
+              </div>
+            )}
           </div>
         </nav>
 
@@ -152,14 +162,20 @@ const Navbar = ({
                     >
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
-                    <div className="flex flex-col gap-3">
-                      <Button asChild variant="outline">
-                        <Link href={auth.login.url}>{auth.login.title}</Link>
-                      </Button>
-                      <Button asChild>
-                        <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                      </Button>
-                    </div>
+                    {isLoggedIn ? (
+                      <Button>sign out</Button>
+                    ) : (
+                      <div className="flex flex-col gap-3">
+                        <Button asChild variant="outline">
+                          <Link href={auth.login.url}>{auth.login.title}</Link>
+                        </Button>
+                        <Button asChild>
+                          <Link href={auth.signup.url}>
+                            {auth.signup.title}
+                          </Link>
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </SheetContent>
               </Sheet>

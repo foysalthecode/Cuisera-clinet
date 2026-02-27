@@ -3,6 +3,8 @@ import { env } from "../env";
 
 const AUTH_URL = env.AUTH_URL;
 
+export let isAuthenticated = false;
+
 export const userService = {
   getSession: async function () {
     try {
@@ -19,6 +21,10 @@ export const userService = {
 
       if (session === null) {
         return { data: null, error: { message: "Session is missing" } };
+      }
+
+      if (session) {
+        isAuthenticated = true;
       }
 
       return { data: session, error: null };

@@ -7,12 +7,14 @@ export async function proxy(request: NextRequest) {
   let isAuthenticated = false;
   let isAdmin = false;
   let isProvider = false;
+  let isUser = false;
   const { data } = await userService.getSession();
 
   if (data) {
     isAuthenticated = true;
     isAdmin = data.user.role === UserRole.admin;
     isProvider = data.user.role === UserRole.provider;
+    isUser = data.user.role === UserRole.user;
   }
 
   if (!isAuthenticated) {
@@ -40,6 +42,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/cart",
     "/dashboard",
     "/dashboard/:path*",
     "/admin-dashboard",

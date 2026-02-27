@@ -4,7 +4,7 @@ import { Carts } from "@/src/types";
 
 export default async function Cart() {
   const { data } = await getCartData();
-  const totalAmount = data.data.reduce((sum: number, cart: Carts) => {
+  const totalAmount = data?.data?.reduce((sum: number, cart: Carts) => {
     return sum + cart.meal.price;
   }, 0);
   return (

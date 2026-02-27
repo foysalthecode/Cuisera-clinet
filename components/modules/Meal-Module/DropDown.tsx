@@ -10,10 +10,22 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getAllMeals } from "@/src/action/meal.action";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function Dropdown() {
-  const [position, setPosition] = React.useState("asc");
-  console.log("from meal dropdown comp", position);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const sort = searchParams.get("sort") ?? "";
+
+  const onChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", value);
+    router.push(`?${params.toString()}`);
+    router.refresh();
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,7 +33,7 @@ export function Dropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-32">
         <DropdownMenuGroup>
-          <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+          <DropdownMenuRadioGroup value={sort} onValueChange={onChange}>
             <DropdownMenuRadioItem value="asc">
               Low to High
             </DropdownMenuRadioItem>

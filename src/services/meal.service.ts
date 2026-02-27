@@ -2,12 +2,12 @@ import { env } from "../env";
 
 const API_URL = env.API_URL;
 
-interface MealParams {
+export interface MealParams {
   sort?: string;
   search?: string;
 }
 
-interface ServiceOptions {
+export interface ServiceOptions {
   cache?: RequestCache;
   revalidate?: number;
 }
@@ -34,6 +34,8 @@ export const mealService = {
       if (options?.revalidate) {
         config.next = { revalidate: options.revalidate };
       }
+
+      config.next = { ...config, tags: ["mealData"] };
 
       const res = await fetch(url.toString(), config);
       // const res = await fetch(`${API_URL}/api/meals`, {

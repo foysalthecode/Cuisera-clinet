@@ -2,6 +2,7 @@ import { Hero } from "@/components/Hero";
 import { CategoryCarousel } from "@/components/modules/homepage/CategoryCarousel";
 import { MealCard } from "@/components/modules/homepage/MealsCard";
 import { mealService } from "@/src/services/meal.service";
+import { isAuthenticated } from "@/src/services/user.service";
 import { Meals } from "@/src/types";
 
 export default async function Home() {
