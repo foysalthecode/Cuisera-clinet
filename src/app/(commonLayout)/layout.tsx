@@ -1,3 +1,4 @@
+import { Footer } from "@/components/layout/Foooter";
 import { Navbar } from "@/components/layout/Navbar";
 import { userService } from "@/src/services/user.service";
 
@@ -12,6 +13,7 @@ export default async function CommonLayout({
     <div>
       <Navbar isLoggedIn={isLoggedIn}></Navbar>
       {children}
+      <Footer></Footer>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,7 +26,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { createMeal } from "@/src/action/meal.action";
 import { useForm } from "@tanstack/react-form";
+import toast from "react-hot-toast";
 import * as z from "zod";
 
 const mealSchema = z.object({
@@ -32,26 +36,53 @@ const mealSchema = z.object({
     .string()
     .min(3, "Title Must be at least Minimum 3 Character")
     .max(100, "Title Must be less than Maximum 100 Character"),
-  description: z.string(),
+  description: z
+    .string()
+    .min(10, "Description must be At Leaste Minimum 10 Character")
+    .max(200, "Description must be less than 200 Character"),
   category: z.string(),
   userId: z.string(),
-  price: z.number(),
+  price: z.string(),
 });
 
-export default function CreateMealFormClient() {
+export default function CreateMealFormClient({ UserId }: { UserId: string }) {
   const form = useForm({
     defaultValues: {
       title: "",
       description: "",
       category: "",
       userId: "",
-      price: 0,
+      price: "",
     },
     validators: {
       onSubmit: mealSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      const title = value.title;
+      const description = value.description;
+      const category = value.category;
+      const userId = UserId as string;
+      const price = Number(value.price);
+      const toasId = toast.loading("Uploading Meal..");
+      const mealData = {
+        title,
+        description,
+        category,
+        userId,
+        price,
+      };
+      try {
+        const res = await createMeal(mealData);
+        console.log("from meal create", res);
+        if (!res.data.success) {
+          toast.error("Meal Upload Failed", { id: toasId });
+          return;
+        }
+        toast.success("Meal Uploaded Successfully", { id: toasId });
+        form.reset();
+      } catch (err) {
+        toast.error("Something Went wrong", { id: toasId });
+      }
     },
   });
 
@@ -78,11 +109,11 @@ export default function CreateMealFormClient() {
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Title</FieldLabel>
                     <Input
-                      type="email"
+                      type="text"
                       id={field.name}
                       name={field.name}
                       value={field.state.value}
-                      placeholder="name@example.com"
+                      placeholder="Your Meal Name"
                       onChange={(e) => field.handleChange(e.target.value)}
                     ></Input>
                     {isInvalid && (
@@ -101,7 +132,9 @@ export default function CreateMealFormClient() {
                     <Textarea
                       id={field.name}
                       name={field.name}
+                      value={field.state.value}
                       placeholder="Description (e.g about you meal)"
+                      onChange={(e) => field.handleChange(e.target.value)}
                       required
                     />
                   </Field>
@@ -119,6 +152,8 @@ export default function CreateMealFormClient() {
                         type="number"
                         id={field.name}
                         name={field.name}
+                        value={field.state.value}
+                        onChange={(e) => field.handleChange(e.target.value)}
                         required
                       />
                     </Field>
@@ -131,7 +166,14 @@ export default function CreateMealFormClient() {
                   return (
                     <Field className="w-1/2">
                       <FieldLabel>Category</FieldLabel>
-                      <Select name={field.name} required>
+                      <Select
+                        name={field.name}
+                        value={field.state.value}
+                        onValueChange={(value: string) =>
+                          field.handleChange(value)
+                        }
+                        required
+                      >
                         <SelectTrigger className="w-full max-w-48">
                           <SelectValue placeholder="Select a Category" />
                         </SelectTrigger>

@@ -2,11 +2,13 @@ import { Hero } from "@/components/Hero";
 import { CategoryCarousel } from "@/components/modules/homepage/CategoryCarousel";
 import { MealCard } from "@/components/modules/homepage/MealsCard";
 import { mealService } from "@/src/services/meal.service";
-import { isAuthenticated } from "@/src/services/user.service";
 import { Meals } from "@/src/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
-  const { data } = await mealService.getAllMeals();
+  const { data } = await mealService.getAllMeals({}, { revalidate: 10 });
+  const response = data?.data?.data || [];
   const categories = data?.data?.data?.map((meal: Meals) => meal.category);
   return (
     <div>
@@ -19,8 +21,8 @@ export default async function Home() {
       </div>
       <div>
         <h1 className="text-5xl text-center font-bold py-5">Featured</h1>
-        <div className="grid md:grid-cols-4 gap-4 p-2 mx-auto">
-          {data?.data?.data?.map(
+        <div className="grid md:grid-cols-4 gap-4 p-2 max-w-7xl mx-auto">
+          {response.map(
             (meal: Meals) =>
               meal.isFeatured && (
                 <MealCard key={meal.id} meal={meal}></MealCard>

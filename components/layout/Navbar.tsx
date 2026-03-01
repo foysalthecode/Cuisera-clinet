@@ -68,10 +68,6 @@ const Navbar = ({
       url: "/meals",
     },
     {
-      title: "Contact",
-      url: "/contact",
-    },
-    {
       title: "Dashboard",
       url: "/dashboard",
     },
@@ -163,7 +159,7 @@ const Navbar = ({
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
                     {isLoggedIn ? (
-                      <Button>sign out</Button>
+                      <Logout></Logout>
                     ) : (
                       <div className="flex flex-col gap-3">
                         <Button asChild variant="outline">

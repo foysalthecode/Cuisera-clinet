@@ -2,6 +2,8 @@ import SingleMealCard from "@/components/modules/Meal-Module/SingleMealCard";
 import { mealService } from "@/src/services/meal.service";
 import { Meals } from "@/src/types";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const { data } = await mealService.getAllMeals();
   return data?.data?.data?.map((meal: Meals) => ({ id: meal.id })).splice(0, 3);

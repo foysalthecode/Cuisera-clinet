@@ -1,16 +1,19 @@
-import CreateMealFormServer from "@/components/modules/provider/createMeal/CreateMealFormServer";
-import { mealService } from "@/src/services/meal.service";
-import { Meals } from "@/src/types";
+import CreateMealFormClient from "@/components/modules/provider/createMeal/CreateMealFormClient";
+import { userService } from "@/src/services/user.service";
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export default async function CreateMeal() {
-  const { data } = await mealService.getAllMeals();
+  const { data: userData } = await userService.getSession();
+  if (!userData?.user?.id) {
+    redirect("/login");
+  }
+  const UserId = userData?.user?.id as string;
 
   return (
     <div>
-      <CreateMealFormServer></CreateMealFormServer>
-      {data.data.data.map((item: Meals) => (
-        <p key={item.id}>{item.title}</p>
-      ))}
+      <CreateMealFormClient UserId={UserId}></CreateMealFormClient>
     </div>
   );
 }

@@ -49,13 +49,16 @@ const Hero = ({
               )}
             </div>
           </div>
-          <Image
-            height={400}
-            width={400}
-            src={hero}
-            alt={imageAlt}
-            className="mx-auto h-full max-h-[524px] w-full max-w-5xl rounded-2xl object-cover"
-          />
+          <div className="relative w-9/12 h-96 mx-auto">
+            <Image
+              // height={400}
+              // width={400}
+              src={hero}
+              alt={imageAlt}
+              fill
+              className="mx-auto h-full w-full max-w-5xl rounded-2xl object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

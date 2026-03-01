@@ -40,43 +40,45 @@ export function CartTable({
     });
   };
   return (
-    <Table>
-      <TableCaption>A list of your recent Added Items</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Meal</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead>Action</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.data.length === 0 && (
+    <div className="border-t rounded-t-md">
+      <Table>
+        <TableCaption>A list of your recent Added Items</TableCaption>
+        <TableHeader>
           <TableRow>
-            <TableCell colSpan={4} className="text-center m-5">
-              Your Cart Is Empty
-            </TableCell>
+            <TableHead>Meal</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead>Action</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
           </TableRow>
-        )}
-        {data?.data?.map((cart: Carts) => (
-          <TableRow key={cart.id}>
-            <TableCell className="font-medium">{cart.meal.title}</TableCell>
-            <TableCell>Cash on Delivery</TableCell>
-            <TableCell>
-              <p onClick={() => handledelete(cart.id)}>
-                <MdOutlineDeleteOutline className="text-red-500 text-2xl" />
-              </p>
-            </TableCell>
-            <TableCell className="text-right">{cart.meal.price}</TableCell>
+        </TableHeader>
+        <TableBody>
+          {data.data.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center m-5">
+                Your Cart Is Empty
+              </TableCell>
+            </TableRow>
+          )}
+          {data?.data?.map((cart: Carts) => (
+            <TableRow key={cart.id}>
+              <TableCell className="font-medium">{cart.meal.title}</TableCell>
+              <TableCell>Cash on Delivery</TableCell>
+              <TableCell>
+                <p onClick={() => handledelete(cart.id)}>
+                  <MdOutlineDeleteOutline className="text-red-500 text-2xl" />
+                </p>
+              </TableCell>
+              <TableCell className="text-right">{cart.meal.price}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>Total</TableCell>
+            <TableCell className="text-right">{totalAmount}</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">{totalAmount}</TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableFooter>
+      </Table>
+    </div>
   );
 }

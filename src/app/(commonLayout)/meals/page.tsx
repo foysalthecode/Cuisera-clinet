@@ -1,26 +1,39 @@
 import { MealCard } from "@/components/modules/homepage/MealsCard";
-import { Dropdown } from "@/components/modules/Meal-Module/DropDown";
+import { SelectGroups } from "@/components/modules/Meal-Module/Seletec";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { getAllMeals } from "@/src/action/meal.action";
-import { MealParams, mealService } from "@/src/services/meal.service";
+import { mealService } from "@/src/services/meal.service";
 import { userService } from "@/src/services/user.service";
 import { Meals } from "@/src/types";
+import PaginationControlls from "@/components/ui/pagination-controll";
+
+export const dynamic = "force-dynamic";
 
 export default async function AllMeals({
   searchParams,
 }: {
-  searchParams: MealParams;
+  searchParams: Promise<{ sort: string; search: string; page: string }>;
 }) {
   const { data: userData } = await userService.getSession();
   let isAuthenticated = false;
   if (userData) {
     isAuthenticated = true;
   }
-  const sort = searchParams?.sort ?? "";
-  const search = searchParams?.search ?? "";
-  const { data } = await getAllMeals({ sort, search });
+  const { sort } = await searchParams;
+  const { search } = await searchParams;
+  const { page } = await searchParams;
+  const { data } = await mealService.getAllMeals(
+    { sort, search, page },
+    { revalidate: 10 },
+  );
+  const response = data?.data?.data || [];
+  const pagination = data?.data?.pagination || {
+    limit: 8,
+    page: 1,
+    total: 0,
+    totalPage: 1,
+  };
   // {
   //   search: searchData,
   // },
@@ -29,9 +42,9 @@ export default async function AllMeals({
   // },
   return (
     <div>
-      <div className="flex justify-between mx-2 gap-2">
+      <div className="flex justify-between max-w-11/12 mx-auto">
         <div>
-          <Dropdown></Dropdown>
+          <SelectGroups></SelectGroups>
         </div>
         <div>
           <Field orientation="horizontal">
@@ -40,10 +53,23 @@ export default async function AllMeals({
           </Field>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 mx-auto">
-        {data?.data?.data?.map((meal: Meals) => (
-          <MealCard key={meal.id} meal={meal} isAuthenticated={isAuthenticated} ></MealCard>
-        ))}
+      <div>
+        {response.length ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 max-w-11/12 mx-auto">
+            {response.map((meal: Meals) => (
+              <MealCard
+                key={meal.id}
+                meal={meal}
+                isAuthenticated={isAuthenticated}
+              ></MealCard>
+            ))}
+          </div>
+        ) : (
+          <div>No</div>
+        )}
+      </div>
+      <div className="max-w-5xl mx-auto pb-6">
+        <PaginationControlls meta={pagination}></PaginationControlls>
       </div>
     </div>
   );

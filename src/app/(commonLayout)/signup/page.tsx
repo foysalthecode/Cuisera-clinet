@@ -1,4 +1,6 @@
-import { SignupForm } from "@/components/modules/authentication/signup-form"
+import { SignupForm } from "@/components/modules/authentication/signup-form";
+
+export const dynamic = "force-dynamic";
 
 export default function Page() {
   return (
@@ -7,5 +9,5 @@ export default function Page() {
         <SignupForm />
       </div>
     </div>
-  )
+  );
 }

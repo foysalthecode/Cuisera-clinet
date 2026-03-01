@@ -12,9 +12,34 @@ export interface Meals {
   createdAt: string;
   updatedAt: string;
   userId: string;
+  user: {
+    name: string;
+  };
 }
 
 export interface MealResponse {
   success: boolean;
   data: Meals;
+}
+
+export interface MealData {
+  title: string;
+  description: string;
+  category: string;
+  userId: string;
+  price: number;
+}
+
+export interface ProviderWithMeal {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified: boolean;
+  image: string | null;
+  createdAt: string;
+  updatedAt: string;
+  role: string;
+  phone: string;
+  status: string;
+  meals: Meals[];
 }
