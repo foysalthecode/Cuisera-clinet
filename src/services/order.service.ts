@@ -53,4 +53,18 @@ export const orderService = {
       return { data: null, error: "Order Failed" };
     }
   },
+  getownOrder: async function () {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/orders`, {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Order Data Retirve Failed" };
+    }
+  },
 };

@@ -3,19 +3,24 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { OwnOrderStatus } from "@/src/types";
+import { CiLocationOn } from "react-icons/ci";
+import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 
 export default function OwnOrderCard({ order }: { order: OwnOrderStatus }) {
   return (
-    <Card className="w-full rounded-2xl border bg-background p-5 shadow-sm transition hover:shadow-md">
+    <Card className="max-w-7xl my-3 rounded-2xl border bg-background p-5 shadow-sm transition hover:shadow-md">
       <div className="flex items-start justify-between">
         {/* Left Side */}
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">{order.meals.title}</h3>
 
-          <p className="text-sm text-muted-foreground">📍 {order.address}</p>
+          <p className="flex items-center gap-1 text-sm text-muted-foreground">
+            <CiLocationOn /> {order.address}
+          </p>
 
-          <p className="text-sm text-muted-foreground">
-            🆔 Order ID: {order.id.slice(0, 8)}...
+          <p className="flex items-center gap-1 text-sm text-muted-foreground">
+            <BsReverseLayoutTextSidebarReverse /> Order ID:{" "}
+            {order.id.slice(0, 8)}...
           </p>
         </div>
 

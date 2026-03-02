@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { env } from "../env";
 
 const AUTH_URL = env.AUTH_URL;
+const API_URL = env.API_URL;
 
 export let isAuthenticated = false;
 
@@ -31,6 +32,20 @@ export const userService = {
     } catch (err) {
       console.error(err);
       return { data: null, error: { message: "something went wrong" } };
+    }
+  },
+  getUserProfile: async function () {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/my-profile`, {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Cannot get User Profile" };
     }
   },
 };

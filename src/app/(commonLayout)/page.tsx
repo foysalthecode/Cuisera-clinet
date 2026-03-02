@@ -2,6 +2,7 @@ import { Hero } from "@/components/Hero";
 import { CategoryCarousel } from "@/components/modules/homepage/CategoryCarousel";
 import { MealCard } from "@/components/modules/homepage/MealsCard";
 import { mealService } from "@/src/services/meal.service";
+import { userService } from "@/src/services/user.service";
 import { Meals } from "@/src/types";
 
 export const dynamic = "force-dynamic";
@@ -10,6 +11,7 @@ export default async function Home() {
   const { data } = await mealService.getAllMeals({}, { revalidate: 10 });
   const response = data?.data?.data || [];
   const categories = data?.data?.data?.map((meal: Meals) => meal.category);
+  const { data: userId } = await userService.getUserProfile();
   return (
     <div>
       <div>
@@ -25,7 +27,7 @@ export default async function Home() {
           {response.map(
             (meal: Meals) =>
               meal.isFeatured && (
-                <MealCard key={meal.id} meal={meal}></MealCard>
+                <MealCard key={meal.id} meal={meal} userId={userId}></MealCard>
               ),
           )}
         </div>

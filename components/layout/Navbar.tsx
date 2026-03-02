@@ -24,6 +24,7 @@ import { ModeToggle } from "./ModeToggle";
 import { CiShoppingCart } from "react-icons/ci";
 import { authClient } from "@/lib/auth-client";
 import Logout from "../modules/authentication/logout";
+import { ProfileDropdown } from "../modules/profile/ProfileDropDow";
 
 interface MenuItem {
   title: string;
@@ -108,7 +109,7 @@ const Navbar = ({
               <CiShoppingCart />
             </Link>
             {isLoggedIn ? (
-              <Logout></Logout>
+              <ProfileDropdown></ProfileDropdown>
             ) : (
               <div className="flex gap-2">
                 <Button asChild variant="outline" size="sm">
@@ -158,6 +159,7 @@ const Navbar = ({
                     >
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
+                    <Link href={"/profile"}>Profile</Link>
                     {isLoggedIn ? (
                       <Logout></Logout>
                     ) : (

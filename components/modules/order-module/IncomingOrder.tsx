@@ -71,7 +71,7 @@ export default function IncomingOrders({ orders }: { orders: Props }) {
           }}
         >
           <div className="space-y-4">
-            {orders?.result.map((order: IncomingOrder) => (
+            {orders?.result?.map((order: IncomingOrder) => (
               <div
                 key={order.id}
                 className="rounded-2xl border border-slate-200 p-5"
@@ -119,7 +119,6 @@ export default function IncomingOrders({ orders }: { orders: Props }) {
                         return (
                           <Select
                             name={field.name}
-                            // value={order.status}
                             onValueChange={(value: string) => {
                               field.handleChange(value);
                               form.setFieldValue("orderId", order.id);

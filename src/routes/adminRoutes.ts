@@ -6,8 +6,12 @@ export const adminRoutes: Route[] = [
     url: "/",
     items: [
       {
-        title: "User Management",
-        url: "/ban-user",
+        title: "All Orders",
+        url: "/admin-dashboard/orders",
+      },
+      {
+        title: "All Users",
+        url: "/admin-dashboard/all-users",
       },
       {
         title: "Home",

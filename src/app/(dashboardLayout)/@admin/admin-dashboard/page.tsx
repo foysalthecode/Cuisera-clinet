@@ -1,9 +1,7 @@
+import { redirect } from "next/navigation";
+
 export const dynamic = "force-dynamic";
 
 export default function AdminDashboard() {
-  return (
-    <div>
-      <h1>Admin dashboard</h1>
-    </div>
-  );
+  return redirect("/admin-dashboard/orders");
 }

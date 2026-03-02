@@ -27,7 +27,7 @@ const addressSchema = z.object({
   id: z.string(),
   address: z
     .string()
-    .min(10, "minimum 20 Character required")
+    .min(10, "minimum 10 Character required")
     .max(150, "maximum limit reached"),
 });
 

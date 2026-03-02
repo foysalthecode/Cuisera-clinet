@@ -14,5 +14,5 @@ export default function Logout() {
     }
     toast.success("Logout success", { id: toastId });
   };
-  return <Button onClick={handleSignOut}>Logout</Button>;
+  return <p onClick={handleSignOut}>Logout</p>;
 }
