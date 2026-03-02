@@ -23,15 +23,6 @@ const orderStatusSchema = z.object({
 });
 
 export default function IncomingOrders({ orders }: { orders: Props }) {
-  // const router = useRouter();
-  // const searchParams = useSearchParams();
-  // const onChage = async (id: string, value: string) => {
-  //   const params = new URLSearchParams(searchParams.toString());
-  //   params.set("id", id.toString());
-  //   params.set("value", value.toString());
-  //   router.push(`?${params.toString()}`);
-  // };
-
   const form = useForm({
     defaultValues: {
       orderId: "",

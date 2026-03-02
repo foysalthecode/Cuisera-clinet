@@ -9,7 +9,6 @@ export default async function SingleProviderWithMenu({
   const { id } = await params;
   const { data } = await mealService.getSingleProviderMeal(id);
   const providermeal = data.data;
-  console.log(providermeal);
   return (
     <div>
       <ProviderWithMeals provider={providermeal}></ProviderWithMeals>

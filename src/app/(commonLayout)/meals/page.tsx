@@ -20,6 +20,7 @@ export default async function AllMeals({
   if (userData) {
     isAuthenticated = true;
   }
+  const userId = userData?.user?.id;
   const { sort } = await searchParams;
   const { search } = await searchParams;
   const { page } = await searchParams;
@@ -61,6 +62,7 @@ export default async function AllMeals({
                 key={meal.id}
                 meal={meal}
                 isAuthenticated={isAuthenticated}
+                userId={userId}
               ></MealCard>
             ))}
           </div>

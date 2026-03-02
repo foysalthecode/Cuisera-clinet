@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { env } from "../env";
-import { OrderStatusData } from "../action/order.action";
+import { MealOrderData, OrderStatusData } from "../types";
 
 const API_URL = env.API_URL;
 
@@ -36,5 +36,21 @@ export const orderService = {
       return { data: null, error: { message: "Update Status Failed" } };
     }
   },
-
+  createOrder: async function (orderData: MealOrderData) {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        body: JSON.stringify(orderData),
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Order Failed" };
+    }
+  },
 };
