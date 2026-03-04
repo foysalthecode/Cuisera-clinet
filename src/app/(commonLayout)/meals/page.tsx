@@ -67,7 +67,7 @@ export default async function AllMeals({
             ))}
           </div>
         ) : (
-          <div>No</div>
+          <div className="max-w-7xl mx-auto text-2xl">No Meals Found</div>
         )}
       </div>
       <div className="max-w-5xl mx-auto pb-6">

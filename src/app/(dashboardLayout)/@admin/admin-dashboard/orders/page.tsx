@@ -3,9 +3,11 @@ import OrderStatusCard from "@/components/modules/admin/OrderStatusCard";
 import { adminService } from "@/src/services/admin.service";
 import { OrderTypes } from "@/src/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function () {
   const { data } = await adminService.getAllOrder();
-  const response = data?.data;
+  const response = data?.data || [];
   const pending =
     response?.filter((order: OrderTypes) => order.status === "PENDING")
       .length ?? 0;
@@ -35,11 +37,7 @@ export default async function () {
       <OrderStatusCard filterData={filterData}></OrderStatusCard>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 shadow-lg border rounded-2xl p-3">
         {response.map((order: OrderTypes) => (
-          <AllOrderCard
-            key={order.id}
-            order={order}
-            filterStatus={filterData}
-          ></AllOrderCard>
+          <AllOrderCard key={order.id} order={order}></AllOrderCard>
         ))}
       </div>
     </div>

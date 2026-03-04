@@ -48,4 +48,16 @@ export const userService = {
       return { data: null, error: "Cannot get User Profile" };
     }
   },
+
+  logOutUser: async function () {
+    try {
+      const res = await fetch(`${API_URL}/api/logout`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Logout Failed" };
+    }
+  },
 };

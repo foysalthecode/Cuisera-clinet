@@ -8,10 +8,10 @@ export default function Logout() {
   const router = useRouter();
   const handleSignOut = async () => {
     const toastId = toast.loading("Signing out...");
-    const data = await authClient.signOut();
-    if (data.data?.success) {
-      router.push("/login");
-    }
+    // const data = await authClient.signOut();
+    // if (data) {
+      // router.push("/login");
+    // }
     toast.success("Logout success", { id: toastId });
   };
   return <p onClick={handleSignOut}>Logout</p>;

@@ -1,6 +1,8 @@
 import ProfileCard from "@/components/modules/profile/profileCard";
 import { userService } from "@/src/services/user.service";
 
+export const dynamic = "force-dynamic"
+
 export default async function MyProfile() {
   const { data } = await userService.getUserProfile();
   return (

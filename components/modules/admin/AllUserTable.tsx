@@ -44,7 +44,6 @@ export function AllUserTable({ response }: { response: UsersTypes[] }) {
         },
       });
       const res = await updateUserStatus(id, statusData);
-      console.log("user table", res.data.success);
       if (res?.data?.success) {
         Swal.close();
         Swal.fire({

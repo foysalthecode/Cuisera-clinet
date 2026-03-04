@@ -7,11 +7,9 @@ export default async function CommonLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { data } = await userService.getSession();
-  const isLoggedIn = data?.user?.role;
   return (
     <div>
-      <Navbar isLoggedIn={isLoggedIn}></Navbar>
+      <Navbar></Navbar>
       {children}
       <Footer></Footer>
     </div>

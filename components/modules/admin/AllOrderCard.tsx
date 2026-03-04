@@ -1,17 +1,10 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { OrderStatusType, OrderTypes } from "@/src/types";
+import { OrderTypes } from "@/src/types";
 
-export default function AllOrderCard({
-  order,
-  filterStatus,
-}: {
-  order: OrderTypes;
-  filterStatus: OrderStatusType;
-}) {
+export default function AllOrderCard({ order }: { order: OrderTypes }) {
   return (
     <div>
       <Card className="w-full rounded-2xl border bg-background p-5 shadow-sm">
@@ -60,17 +53,4 @@ export default function AllOrderCard({
       </Card>
     </div>
   );
-}
-
-{
-  /* <Card className="mb-6 w-full rounded-2xl border bg-background p-4 shadow-sm">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-        <StatBox label="Total" value={total} />
-        <StatBox label="Pending" value={pending} color="amber" />
-        <StatBox label="Preparing" value={preparing} color="blue" />
-        <StatBox label="Ready" value={ready} color="indigo" />
-        <StatBox label="Delivered" value={delivered} color="emerald" />
-        <StatBox label="Canceled" value={canceled} color="rose" />
-      </div>
-    </Card> */
 }

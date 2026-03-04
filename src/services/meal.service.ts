@@ -62,10 +62,21 @@ export const mealService = {
       return { data: null, error: { message: "Cannot get the meal" } };
     }
   },
-  createMeal: async function (mealData: MealData) {
-    console.log("meal data from meal service", mealData);
+  createMeal: async function (mealData: MealData, options?: ServiceOptions) {
     try {
       const cookieStore = await cookies();
+      const config: RequestInit = {};
+
+      if (options?.cache) {
+        config.cache = options.cache;
+      }
+
+      if (options?.revalidate) {
+        config.next = { revalidate: options.revalidate };
+      }
+
+      config.next = { ...config, tags: ["mealData"] };
+
       const res = await fetch(`${API_URL}/api/provider/meals`, {
         method: "POST",
         headers: {
@@ -73,9 +84,9 @@ export const mealService = {
           Cookie: cookieStore.toString(),
         },
         body: JSON.stringify(mealData),
+        ...config,
       });
       const data = await res.json();
-      console.log("data from meal service", data);
       if (data.error) {
         return {
           data: null,

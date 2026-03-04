@@ -1,5 +1,4 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-import { Prociono } from "next/font/google";
 import * as z from "zod";
 
 export const env = createEnv({

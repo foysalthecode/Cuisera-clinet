@@ -1,11 +1,18 @@
 "use server";
 
 import { updateTag } from "next/cache";
-import { MealParams, mealService } from "../services/meal.service";
+import {
+  MealParams,
+  mealService,
+  ServiceOptions,
+} from "../services/meal.service";
 import { MealData } from "../types";
 
-export const getAllMeals = async (params?: MealParams) => {
-  const res = await mealService.getAllMeals(params);
+export const getAllMeals = async (
+  params?: MealParams,
+  options?: ServiceOptions,
+) => {
+  const res = await mealService.getAllMeals(params, options);
   return res;
 };
 
@@ -14,7 +21,7 @@ export const getSingleMeal = async (id: string) => {
 };
 
 export const createMeal = async (mealData: MealData) => {
-  const res = await mealService.createMeal(mealData);
+  const res = await mealService.createMeal(mealData, { cache: "no-store" });
   updateTag("mealData");
   return res;
 };

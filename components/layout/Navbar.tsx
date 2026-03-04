@@ -22,9 +22,9 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import { CiShoppingCart } from "react-icons/ci";
-import { authClient } from "@/lib/auth-client";
 import Logout from "../modules/authentication/logout";
 import { ProfileDropdown } from "../modules/profile/ProfileDropDow";
+import { useEffect, useState } from "react";
 
 interface MenuItem {
   title: string;
@@ -53,7 +53,6 @@ interface Navbar1Props {
       url: string;
     };
   };
-  isLoggedIn: string | undefined;
 }
 
 const Navbar = ({
@@ -78,8 +77,20 @@ const Navbar = ({
     signup: { title: "Sign up", url: "/signup" },
   },
   className,
-  isLoggedIn,
 }: Navbar1Props) => {
+  // const [user, setUser] = useState(false);
+
+  // useEffect(() => {
+  //   const load = async () => {
+  //     const res = await fetch("/api/session", { cache: "no-store" });
+  //     const user = await res.json();
+  //     setUser(user);
+  //   };
+  //   load();
+  // }, []);
+  // const isLoggedIn = !!user;
+  const isLoggedIn = true;
+
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto px-4">
@@ -159,10 +170,13 @@ const Navbar = ({
                     >
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
-                    <Link href={"/profile"}>Profile</Link>
+                    <Link href={"/profile"} className="text-md font-semibold">
+                      Profile
+                    </Link>
                     {isLoggedIn ? (
                       <Logout></Logout>
                     ) : (
+                      // <Button>Log out</Button>
                       <div className="flex flex-col gap-3">
                         <Button asChild variant="outline">
                           <Link href={auth.login.url}>{auth.login.title}</Link>

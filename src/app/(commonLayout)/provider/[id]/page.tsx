@@ -1,6 +1,8 @@
 import ProviderWithMeals from "@/components/modules/Meal-Module/MealProvider";
 import { mealService } from "@/src/services/meal.service";
 
+export const dynamic = "force-dynamic";
+
 export default async function SingleProviderWithMenu({
   params,
 }: {

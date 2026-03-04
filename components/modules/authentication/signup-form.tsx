@@ -18,10 +18,13 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+import { env } from "@/src/env";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import * as z from "zod";
+
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const formSchema = z.object({
   name: z.string().min(1, "This Field is required"),
@@ -33,7 +36,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleGoogleLogin = async () => {
     const data = authClient.signIn.social({
       provider: "google",
-      callbackURL: "http://localhost:3000",
+      callbackURL: FRONTEND_URL,
     });
     console.log(data);
   };

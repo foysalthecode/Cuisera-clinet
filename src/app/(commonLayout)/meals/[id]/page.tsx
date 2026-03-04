@@ -4,10 +4,10 @@ import { Meals } from "@/src/types";
 
 export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() {
-  const { data } = await mealService.getAllMeals();
-  return data?.data?.data?.map((meal: Meals) => ({ id: meal.id })).splice(0, 3);
-}
+// export async function generateStaticParams() {
+//   const { data } = await mealService.getAllMeals({}, { cache: "no-store" });
+//   return data?.data?.data?.map((meal: Meals) => ({ id: meal.id })).splice(0, 3);
+// }
 
 export default async function SingleMeal({
   params,

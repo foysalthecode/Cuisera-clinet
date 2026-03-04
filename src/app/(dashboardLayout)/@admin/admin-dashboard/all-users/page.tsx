@@ -1,9 +1,11 @@
 import { AllUserTable } from "@/components/modules/admin/AllUserTable";
 import { adminService } from "@/src/services/admin.service";
 
+export const dynamic = "force-dynamic";
+
 export default async function AllUsers() {
   const { data } = await adminService.getAllUser();
-  const response = data?.data;
+  const response = data?.data || [];
   const totalUser = response?.length;
   return (
     <div>

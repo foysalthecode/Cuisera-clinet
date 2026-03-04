@@ -4,17 +4,18 @@ import { UserRole } from "./constants/roles";
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
   let isAuthenticated = false;
   let isAdmin = false;
   let isProvider = false;
-  let isUser = false;
+  let isUserActive = false;
   const { data } = await userService.getSession();
 
   if (data) {
     isAuthenticated = true;
     isAdmin = data.user.role === UserRole.admin;
     isProvider = data.user.role === UserRole.provider;
-    isUser = data.user.role === UserRole.user;
+    isUserActive = data.user.role === UserRole.user;
   }
 
   if (!isAuthenticated) {
@@ -35,6 +36,16 @@ export async function proxy(request: NextRequest) {
 
   if (!isProvider && pathname.startsWith("/provider-dashboard")) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (pathname.startsWith("/verify-email")) {
+    return NextResponse.next();
+  }
+
+  const sessionToken = request.cookies.get("better-auth.session_token");
+
+  if (!sessionToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   return NextResponse.next();

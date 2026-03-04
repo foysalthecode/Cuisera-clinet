@@ -17,6 +17,7 @@ import { MdDeliveryDining } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { OrderDrawer } from "../Meal-Module/MealOrderDrawer";
+import { useRouter } from "next/navigation";
 
 export function MealCard({
   meal,
@@ -27,6 +28,7 @@ export function MealCard({
   isAuthenticated?: boolean;
   userId: string;
 }) {
+  const router = useRouter();
   const handleAddToCart = async (id: string) => {
     addToCart(id);
     Swal.fire({
@@ -35,6 +37,21 @@ export function MealCard({
       title: "Your work has been saved",
       showConfirmButton: false,
       timer: 1500,
+    });
+  };
+  const handleOrder = () => {
+    Swal.fire({
+      title: "Cannot Place the order",
+      text: "You need to Login to procced",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Login",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push("/login");
+      }
     });
   };
   return (
@@ -69,10 +86,13 @@ export function MealCard({
       </CardHeader>
       <CardFooter>
         <div className="w-full flex items-center gap-2">
-          <div>
-            <OrderDrawer meal={meal} userId={userId}></OrderDrawer>
-          </div>
-
+          {isAuthenticated ? (
+            <div>
+              <OrderDrawer meal={meal} userId={userId}></OrderDrawer>
+            </div>
+          ) : (
+            <Button onClick={handleOrder}>Order</Button>
+          )}
           <Button
             onClick={() => handleAddToCart(meal.id)}
             disabled={!isAuthenticated}
