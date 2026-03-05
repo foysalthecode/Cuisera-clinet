@@ -17,10 +17,13 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { authClient } from "@/lib/auth-client";
 import { env } from "@/src/env";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import * as z from "zod";
 
@@ -30,6 +33,7 @@ const formSchema = z.object({
   name: z.string().min(1, "This Field is required"),
   email: z.email(),
   password: z.string().min(8, "Minimum 8 Character required"),
+  role: z.string(),
 });
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
@@ -45,11 +49,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       name: "",
       email: "",
       password: "",
+      role: "",
     },
     validators: {
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
+      const router = useRouter();
       const toastId = toast.loading("Signing...");
       try {
         const { data, error } = await authClient.signUp.email(value);
@@ -59,6 +65,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
           return;
         }
         toast.success("Sucessfully Logged in", { id: toastId });
+        router.push("/");
       } catch (err) {
         toast.error("Internel Server Error", { id: toastId });
       }
@@ -81,6 +88,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
           }}
         >
           <FieldGroup>
+            {/* name section */}
             <form.Field
               name="name"
               children={(field) => {
@@ -145,6 +153,31 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors}></FieldError>
                     )}
+                  </Field>
+                );
+              }}
+            />
+            {/* role section */}
+            <form.Field
+              name="role"
+              children={(field) => {
+                return (
+                  <Field>
+                    <FieldLabel>Choose Role</FieldLabel>
+                    <RadioGroup
+                      defaultValue="CUSTOMER"
+                      onValueChange={(value) => field.handleChange(value)}
+                      className="w-fit"
+                    >
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value="USER" id="r2" />
+                        <Label htmlFor="r2">Customer</Label>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value="PROVIDER" id="r3" />
+                        <Label htmlFor="r3">Provider</Label>
+                      </div>
+                    </RadioGroup>
                   </Field>
                 );
               }}

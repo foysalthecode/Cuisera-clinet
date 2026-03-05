@@ -12,6 +12,11 @@ export default async function Home() {
   const response = data?.data?.data || [];
   const categories = data?.data?.data?.map((meal: Meals) => meal.category);
   const { data: userId } = await userService.getUserProfile();
+  const { data: userData } = await userService.getSession();
+  let isAuthenticated = false;
+  if (userData) {
+    isAuthenticated = true;
+  }
   return (
     <div>
       <div>
@@ -27,7 +32,12 @@ export default async function Home() {
           {response.map(
             (meal: Meals) =>
               meal.isFeatured && (
-                <MealCard key={meal.id} meal={meal} userId={userId}></MealCard>
+                <MealCard
+                  key={meal.id}
+                  meal={meal}
+                  userId={userId}
+                  isAuthenticated={isAuthenticated}
+                ></MealCard>
               ),
           )}
         </div>
