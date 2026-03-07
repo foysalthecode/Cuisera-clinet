@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export default async function () {
   const { data } = await orderService.getownOrder();
   const response = data?.data || [];
-  console.log(data);
+  console.log(response);
   return (
     <div>
       <div>
