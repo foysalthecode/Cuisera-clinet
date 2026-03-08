@@ -67,4 +67,19 @@ export const orderService = {
       return { data: null, error: "Order Data Retirve Failed" };
     }
   },
+  deleteOwnOrder: async function (id: string) {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/orders/${id}`, {
+        method: "DELETE",
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Order Delete Failed" };
+    }
+  },
 };

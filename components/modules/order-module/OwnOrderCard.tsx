@@ -5,10 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { OwnOrderStatus } from "@/src/types";
 import { CiLocationOn } from "react-icons/ci";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import { Button } from "@/components/ui/button";
+import DeleteOrderButton from "./deleteOrderButton";
 
 export default function OwnOrderCard({ order }: { order: OwnOrderStatus }) {
   return (
-    <Card className="max-w-7xl my-3 rounded-2xl border bg-background p-5 shadow-sm transition hover:shadow-md">
+    <Card className="rounded-2xl border bg-background p-5 shadow-sm transition hover:shadow-md">
       <div className="flex items-start justify-between">
         {/* Left Side */}
         <div className="space-y-2">
@@ -25,7 +27,7 @@ export default function OwnOrderCard({ order }: { order: OwnOrderStatus }) {
         </div>
 
         {/* Right Side */}
-        <div className="text-right space-y-2">
+        <div className="flex flex-col text-right space-y-2">
           <p className="text-lg font-bold">৳ {order.meals.price}</p>
 
           <Badge
@@ -39,6 +41,7 @@ export default function OwnOrderCard({ order }: { order: OwnOrderStatus }) {
           >
             {order.status}
           </Badge>
+          <DeleteOrderButton id={order.id}></DeleteOrderButton>
         </div>
       </div>
     </Card>

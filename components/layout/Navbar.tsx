@@ -25,6 +25,8 @@ import { CiShoppingCart } from "react-icons/ci";
 import Logout from "../modules/authentication/logout";
 import { ProfileDropdown } from "../modules/profile/ProfileDropDow";
 import { useEffect, useState } from "react";
+import { userService } from "@/src/services/user.service";
+import { getUser } from "@/src/action/authenticatio.action";
 
 interface MenuItem {
   title: string;
@@ -78,18 +80,18 @@ const Navbar = ({
   },
   className,
 }: Navbar1Props) => {
-  // const [user, setUser] = useState(false);
+  const [user, setUser] = useState(false);
 
-  // useEffect(() => {
-  //   const load = async () => {
-  //     const res = await fetch("/api/session", { cache: "no-store" });
-  //     const user = await res.json();
-  //     setUser(user);
-  //   };
-  //   load();
-  // }, []);
-  // const isLoggedIn = !!user;
-  const isLoggedIn = true;
+  useEffect(() => {
+    const load = async () => {
+      const data = await getUser();
+      const user = data?.user;
+      setUser(user);
+    };
+    load();
+  }, []);
+  const isLoggedIn = !!user;
+  // const isLoggedIn = true;
 
   return (
     <section className={cn("py-4", className)}>

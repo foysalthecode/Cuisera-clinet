@@ -15,3 +15,8 @@ export const createOrder = async (orderData: MealOrderData) => {
   const res = await orderService.createOrder(orderData);
   return res;
 };
+
+export const deleteOwnOrder = async (id: string) => {
+  const res = await orderService.deleteOwnOrder(id);
+  return res;
+};
