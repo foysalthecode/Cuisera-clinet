@@ -25,8 +25,8 @@ export interface MealResponse {
 export interface MealData {
   title: string;
   description: string;
-  category: string;
-  userId: string;
+  category?: string;
+  userId?: string;
   price: number;
 }
 

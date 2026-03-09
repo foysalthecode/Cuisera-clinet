@@ -108,4 +108,51 @@ export const mealService = {
       return { data: null, error: "Provider with Meal data Retrive Failed" };
     }
   },
+  getMyMeal: async () => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/provider/meals`, {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Cannot retrive Your Meals" };
+    }
+  },
+  updateMeal: async (mealId: string, mealData: MealData) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/provider/meals/${mealId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        body: JSON.stringify(mealData),
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Update Failed" };
+    }
+  },
+  deleteMeal: async (mealId: string) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/api/provider/meals/${mealId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+      });
+      const data = await res.json();
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "Delete Unsuccessfull" };
+    }
+  },
 };

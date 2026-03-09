@@ -73,7 +73,6 @@ export default function CreateMealFormClient({ UserId }: { UserId: string }) {
       };
       try {
         const res = await createMeal(mealData);
-        console.log("from meal create", res);
         if (!res.data.success) {
           toast.error("Meal Upload Failed", { id: toasId });
           return;

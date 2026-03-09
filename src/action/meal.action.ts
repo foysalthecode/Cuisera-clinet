@@ -25,3 +25,13 @@ export const createMeal = async (mealData: MealData) => {
   updateTag("mealData");
   return res;
 };
+
+export const updateMeal = async (mealId: string, mealData: MealData) => {
+  const res = await mealService.updateMeal(mealId, mealData);
+  return res;
+};
+
+export const deleteMeal = async (mealId: string) => {
+  const res = await mealService.deleteMeal(mealId);
+  return res;
+};

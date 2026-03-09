@@ -8,7 +8,6 @@ export default function ProviderWithMeals({
 }: {
   provider: ProviderWithMeal;
 }) {
-  console.log("from provider with meal comp", provider.email);
 
   return (
     <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
