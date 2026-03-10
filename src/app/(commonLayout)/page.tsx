@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const { data } = await getAllMeals({}, { revalidate: 10 });
   const response = data?.data?.data || [];
-  const categories = data?.data?.data?.map((meal: Meals) => meal.category);
+  const isFeatured = response.filter((meal: Meals) => meal.isFeatured);
   const { data: userId } = await userService.getUserProfile();
   const { data: userData } = await userService.getSession();
   let isAuthenticated = false;
@@ -24,7 +24,7 @@ export default async function Home() {
       </div>
       <div className="flex flex-col justify-center items-center gap-5">
         <h1 className="text-5xl font-bold">Cuisines</h1>
-        <CategoryCarousel categories={categories}></CategoryCarousel>
+        <CategoryCarousel></CategoryCarousel>
       </div>
       <div>
         <h1 className="text-5xl text-center font-bold py-5">Featured</h1>

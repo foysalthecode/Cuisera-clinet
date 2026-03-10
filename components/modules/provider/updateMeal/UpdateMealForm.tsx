@@ -9,19 +9,6 @@ import { updateMeal } from "@/src/action/meal.action";
 import { Meals } from "@/src/types";
 import { useForm } from "@tanstack/react-form";
 import toast from "react-hot-toast";
-import * as z from "zod";
-
-const mealSchema = z.object({
-  title: z
-    .string()
-    .min(3, "Title Must be at least Minimum 3 Character")
-    .max(100, "Title Must be less than Maximum 100 Character"),
-  description: z
-    .string()
-    .min(10, "Description must be At Leaste Minimum 10 Character")
-    .max(200, "Description must be less than 200 Character"),
-  price: z.string(),
-});
 
 export default function UpdateMealForm({
   meal,
@@ -45,10 +32,10 @@ export default function UpdateMealForm({
       try {
         const res = await updateMeal(mealId, mealData);
         if (res.data.success) {
-          toast.success("Updated", { id: toastId });
+          return toast.success("Updated", { id: toastId });
         }
       } catch (err) {
-        toast.error("something went wrong", { id: toastId });
+        return toast.error("something went wrong", { id: toastId });
       }
     },
   });

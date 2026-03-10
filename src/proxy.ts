@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { userService } from "./services/user.service";
 import { UserRole } from "./constants/roles";

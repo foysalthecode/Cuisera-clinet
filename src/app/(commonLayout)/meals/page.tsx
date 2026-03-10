@@ -7,6 +7,7 @@ import { mealService } from "@/src/services/meal.service";
 import { userService } from "@/src/services/user.service";
 import { Meals } from "@/src/types";
 import PaginationControlls from "@/components/ui/pagination-controll";
+import SearchMeal from "@/components/modules/Meal-Module/SearchMeal";
 
 export const dynamic = "force-dynamic";
 
@@ -48,10 +49,7 @@ export default async function AllMeals({
           <SelectGroups></SelectGroups>
         </div>
         <div>
-          <Field orientation="horizontal">
-            <Input type="search" placeholder="Search..." />
-            <Button>Search</Button>
-          </Field>
+          <SearchMeal></SearchMeal>
         </div>
       </div>
       <div>

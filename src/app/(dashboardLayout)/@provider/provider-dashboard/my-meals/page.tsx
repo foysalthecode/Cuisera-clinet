@@ -2,6 +2,8 @@ import MyMealCard from "@/components/modules/Meal-Module/MyMealCard";
 import { mealService } from "@/src/services/meal.service";
 import { Meals } from "@/src/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function MyMealsPage() {
   const { data } = await mealService.getMyMeal();
   const response = data?.data;

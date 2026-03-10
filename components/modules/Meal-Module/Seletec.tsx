@@ -16,7 +16,6 @@ export function SelectGroups() {
     const params = new URLSearchParams(searchParams);
     params.set("sort", value.toString());
     router.push(`?${params.toString()}`);
-    console.log(value);
   };
   return (
     <Select onValueChange={onChage}>

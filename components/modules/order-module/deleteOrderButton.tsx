@@ -1,17 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { deleteOwnOrder } from "@/src/action/order.action";
-import { orderService } from "@/src/services/order.service";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function DeleteOrderButton({ id }: { id: string }) {
   const router = useRouter();
   const handleDeleteOrder = async () => {
     const toastId = toast.loading("Loading");
-    const res = await deleteOwnOrder(id);
-    toast.success("Cancelled", { id: toastId });
-    router.refresh();
-    console.log(res);
+    try {
+      const res = await deleteOwnOrder(id);
+      if (!res.data.success) {
+        return toast.error("Order Canecl Failed", { id: toastId });
+      }
+      toast.success("Cancelled", { id: toastId });
+      router.refresh();
+      return;
+    } catch (err) {
+      return toast.error("Internal Server Error", { id: toastId });
+    }
   };
 
   return (

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -8,12 +7,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export function CategoryCarousel({ categories }: { categories: string[] }) {
-  const uniqueCategory = [...new Set(categories)];
+const categories = ["PIZZA", "BURGER", "CHICKEN", "MILK SHAKE", "POROTA"];
+
+export function CategoryCarousel() {
   return (
-    <Carousel className="w-full max-w-[12rem] sm:max-w-xs md:max-w-sm">
+    <Carousel className="w-full sm:max-w-xs md:max-w-sm">
       <CarouselContent className="-ml-1">
-        {uniqueCategory.map((category, index) => (
+        {categories.map((category, index) => (
           <CarouselItem key={index} className="basis-1/2 pl-1 lg:basis-1/3">
             <div className="p-1">
               <Card>
