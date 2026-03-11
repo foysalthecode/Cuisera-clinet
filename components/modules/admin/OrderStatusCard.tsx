@@ -25,28 +25,28 @@ export default function OrderStatusCard({
           <div className="text-lg font-semibold text-slate-900">
             {filterData.delivered}
           </div>
-          <div className="text-xs text-slate-600">Pending</div>
+          <div className="text-xs text-slate-600">Deliverd</div>
         </div>
         {/* canceled*/}
         <div className="rounded-2xl border bg-slate-50 px-4 py-3 text-center">
           <div className="text-lg font-semibold text-slate-900">
             {filterData.canceled}
           </div>
-          <div className="text-xs text-slate-600">Pending</div>
+          <div className="text-xs text-slate-600">Canceled</div>
         </div>
         {/* preparing */}
         <div className="rounded-2xl border bg-slate-50 px-4 py-3 text-center">
           <div className="text-lg font-semibold text-slate-900">
             {filterData.preparing}
           </div>
-          <div className="text-xs text-slate-600">Pending</div>
+          <div className="text-xs text-slate-600">Preparing</div>
         </div>
         {/* ready*/}
         <div className="rounded-2xl border bg-slate-50 px-4 py-3 text-center">
           <div className="text-lg font-semibold text-slate-900">
             {filterData.ready}
           </div>
-          <div className="text-xs text-slate-600">Pending</div>
+          <div className="text-xs text-slate-600">Ready</div>
         </div>
       </div>
     </div>

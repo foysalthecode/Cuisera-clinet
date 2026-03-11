@@ -23,8 +23,27 @@ export default async function OrdersPage() {
             <p>email : admin.foysal@gmail.com</p>
           </div>
         </div>
-      ) : (
+      ) : response.result.length > 0 ? (
         <IncomingOrders orders={response}></IncomingOrders>
+      ) : (
+        <div className="flex items-center justify-center py-20">
+          <div className="w-full max-w-md rounded-2xl border bg-white p-8 text-center shadow-sm">
+            <div className="flex justify-center mb-4">
+              <div className="h-16 w-16 flex items-center justify-center rounded-full bg-gray-100 text-3xl">
+                📦
+              </div>
+            </div>
+
+            <h2 className="text-xl font-semibold text-gray-800">
+              No Incoming Orders
+            </h2>
+
+            <p className="mt-2 text-sm text-gray-500">
+              There are currently no incoming orders. New orders will appear
+              here once customers place them.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
