@@ -48,7 +48,6 @@ export function OrderDrawer({
   const [open, setOpen] = useState(false);
   const [feedBackOpen, setFeedBackOpen] = useState(false);
   const [rating, setRating] = useState(0);
-  console.log(rating);
   const form = useForm({
     defaultValues: {
       id: "",

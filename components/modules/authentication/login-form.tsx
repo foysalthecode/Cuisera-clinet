@@ -38,7 +38,6 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       provider: "google",
       callbackURL: FRONTEND_URL,
     });
-    console.log(data);
   };
   const form = useForm({
     defaultValues: {

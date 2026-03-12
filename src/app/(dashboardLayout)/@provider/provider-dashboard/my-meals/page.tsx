@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 export default async function MyMealsPage() {
   const { data } = await mealService.getMyMeal();
   const response = data?.data;
-  console.log("my meals", response);
   return (
     <div>
       {response.length > 0 ? (

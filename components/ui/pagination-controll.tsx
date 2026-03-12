@@ -28,7 +28,6 @@ export default function PaginationControlls({ meta }: PaginationProps) {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", page.toString());
     router.push(`?${params.toString()}`);
-    console.log(params);
   };
 
   const start = (currentPage - 1) * pageSize + 1;
