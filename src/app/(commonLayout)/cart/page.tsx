@@ -9,6 +9,7 @@ export default async function Cart() {
   const totalAmount = data?.data?.reduce((sum: number, cart: Carts) => {
     return sum + cart.meal.price;
   }, 0);
+  console.log(totalAmount);
   return (
     <div className="w-10/12 mx-auto">
       <CartTable data={data} totalAmount={totalAmount}></CartTable>
