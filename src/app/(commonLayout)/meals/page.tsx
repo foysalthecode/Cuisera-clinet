@@ -36,6 +36,7 @@ export default async function AllMeals({
     total: 0,
     totalPage: 1,
   };
+  console.log(pagination);
   // {
   //   search: searchData,
   // },
