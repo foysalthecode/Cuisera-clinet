@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function () {
   const { data } = await adminService.getAllOrder();
   const response = data?.data || [];
+  console.log("response from admin dash all order", response);
   const pending =
     response?.filter((order: OrderTypes) => order.status === "PENDING")
       .length ?? 0;
